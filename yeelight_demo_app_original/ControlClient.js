@@ -107,6 +107,7 @@ proto.connectDev = function (message, target, callback) {
             console.log(socket);
             var socketId = socket.socketId; 
             chrome.socket.setKeepAlive(socketId, true, function (result) {
+                //###### edit made here
                 /*
                 if (result != 0) {
                     me.handleError("set keepalive failed", "error");

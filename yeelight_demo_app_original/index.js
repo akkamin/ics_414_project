@@ -86,7 +86,7 @@ function init() {
       });
 }
 
-
+//###### edit made here
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   var newMessageLi;
   var messages = document.getElementById('messages');
