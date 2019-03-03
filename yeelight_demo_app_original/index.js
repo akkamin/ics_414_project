@@ -15,6 +15,8 @@ function addDevice(did, location) {
   devList.appendChild(devItem);
 }
 
+
+
 function sendMessage() {
   var messageInputBox = document.getElementById('input-box');
   var message = messageInputBox.value;
@@ -25,6 +27,34 @@ function sendMessage() {
   messageInputBox.value = '';
 }
 
+function toggleOnOff() {
+    var message = "{\"id\":1,\"method\":\"toggle\",\"params\":[]}";
+    rtm({
+    type: 'request',
+    message: message
+  });
+}
+
+function changeBrightness() {
+    var bright_level = document.getElementById("brightness_control").value;
+    var message = "{\"id\":2,\"method\":\"set_bright\",\"params\":[";
+    message += bright_level + "]}";
+    rtm({
+    type: 'request',
+    message: message
+  });
+}
+
+function changeColorTemp() {
+    var temp_level = document.getElementById("temperature_control").value;
+    var message = "{\"id\":1,\"method\":\"set_ct_abx\",\"params\":[";
+    message += temp_level + ",\"smooth\", 500 ]}";
+    rtm({
+    type: 'request',
+    message: message
+  });
+}
+
 function init() {
     var messageInputBox = document.getElementById('input-box');
     messageInputBox.addEventListener('keydown', function (e) {
@@ -32,7 +62,22 @@ function init() {
             sendMessage();
         }
     });
+    
+    var toggleButton = document.getElementById('toggle_button');
+    toggleButton.addEventListener('click', function (e) {  
+            toggleOnOff();
+    });
 
+    var brightness = document.getElementById("brightness_control");
+    brightness.addEventListener('change', function (e) {
+        changeBrightness();
+    });
+    
+    var color_temp = document.getElementById("temperature_control");
+    color_temp.addEventListener('change', function (e) {
+        changeColorTemp();
+    });
+    
   var closeBox = document.getElementById('close');
   closeBox.onclick = function () {
       chrome.app.window.current().close();
@@ -84,6 +129,7 @@ function init() {
               target: e.target.id
           });
       });
+    
 }
 
 //###### edit made here
