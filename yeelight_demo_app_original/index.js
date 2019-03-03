@@ -6,6 +6,11 @@ function rtm(message, callback) {
   }
 }
 
+function openNewWindow(){ 
+    chrome.app.window.create('index_2.html', function(window) {
+   });
+}
+
 function addDevice(did, location) {
   var devList = document.getElementById('led-list');
   var devItem = document.createElement('li');
@@ -55,6 +60,8 @@ function changeColorTemp() {
   });
 }
 
+
+
 function init() {
     var messageInputBox = document.getElementById('input-box');
     messageInputBox.addEventListener('keydown', function (e) {
@@ -68,6 +75,11 @@ function init() {
             toggleOnOff();
     });
 
+    var newWindowButton = document.getElementById('new_window_button');
+    newWindowButton.addEventListener('click', function (e) {  
+            openNewWindow();
+    });
+    
     var brightness = document.getElementById("brightness_control");
     brightness.addEventListener('change', function (e) {
         changeBrightness();
